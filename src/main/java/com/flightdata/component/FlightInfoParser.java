@@ -23,8 +23,8 @@ public class FlightInfoParser {
 
     public FlightInfoDTO parseFlightInfo(String json) {
         long startTime = System.currentTimeMillis();
-        long currentTime = startTime;
-        while (currentTime - startTime < MAX_PROCESSING_TIME_SECONDS * 1000) {
+        long currentTime;
+        do {
             try {
                 return processFlightInfo(json);
             } catch (IOException | FlightErrorHandling.NotFoundFlightsException |
@@ -33,7 +33,8 @@ public class FlightInfoParser {
             }
             sleepForInterval();
             currentTime = System.currentTimeMillis();
-        }
+        } while (currentTime - startTime < MAX_PROCESSING_TIME_SECONDS * 1000);
+
         throw new FlightErrorHandling.MaxProcessingTimeoutException("Max processing time exceeded");
     }
 
@@ -45,12 +46,14 @@ public class FlightInfoParser {
         if (statesNode.isArray() && !statesNode.isEmpty()) {
             JsonNode stateNode = statesNode.get(0);
             FlightInfoDTO flightInfoDTO = new FlightInfoDTO(stateNode);
+
             String locationJson = nominatimApiService.getCountryLocation(stateNode.get(6).asText(), stateNode.get(5).asText());
-            getFlightInfoFromDTO(flightInfoDTO, stateNode);
             if (locationJson == null) {
                 throw new FlightErrorHandling.FailedToRetrievalException("Failed to retrieve country location from JSON");
             }
             flightInfoDTO.setOriginCountry(nominatimApiService.getLocationFromJson(locationJson));
+
+            getFlightInfoFromDTO(flightInfoDTO, stateNode);
             return flightInfoDTO;
         } else {
             throw new FlightErrorHandling.NotFoundFlightsException("No flight states found in JSON");
@@ -74,7 +77,7 @@ public class FlightInfoParser {
         flightInfoDTO.setIcao24(stateNode.get(0).asText());
         flightInfoDTO.setCallsign(stateNode.get(1).asText());
         flightInfoDTO.setOriginCountry(stateNode.get(2).asText());
-        flightInfoDTO.setLongtitude(stateNode.get(5).asDouble());
+        flightInfoDTO.setLongitude(stateNode.get(5).asDouble());
         flightInfoDTO.setLatitude(stateNode.get(6).asDouble());
         double velocityMs = stateNode.get(9).asDouble();
         flightInfoDTO.setVelocityKmh(velocityMs * 3.6);

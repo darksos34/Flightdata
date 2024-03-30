@@ -17,7 +17,7 @@ public class FlightInfoDTO {
     private String callsign;
     private String originCountry;
     private Double velocityKmh;
-    private Double longtitude;
+    private Double longitude;
     private Double latitude;
 
     public FlightInfoDTO(JsonNode stateNode) {
@@ -26,4 +26,6 @@ public class FlightInfoDTO {
     public FlightInfoDTO() {
     }
 
+    public static void sleepForInterval(int intervalSeconds) {
+    }
 }

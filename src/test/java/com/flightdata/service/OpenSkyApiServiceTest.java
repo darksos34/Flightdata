@@ -50,7 +50,7 @@ class OpenSkyApiServiceTest {
         FlightInfoDTO result = openSkyApiService.getFlightInfo(transponderAddress);
 
         assertNotNull(result);
-        assertEquals(mockFlightInfo, result); // Controleer of de resultaten overeenkomen met het verwachte object
+        assertEquals(mockFlightInfo, result);
     }
 
     private FlightInfoDTO createMockFlightInfo() {
@@ -59,7 +59,7 @@ class OpenSkyApiServiceTest {
         mockFlightInfo.setIcao24("ABC123");
         mockFlightInfo.setCallsign("FLIGHT123");
         mockFlightInfo.setOriginCountry("NL");
-        mockFlightInfo.setLongtitude(80.000);
+        mockFlightInfo.setLongitude(80.000);
         mockFlightInfo.setLatitude(35.0000);
         mockFlightInfo.setVelocityKmh(800.0);
         return mockFlightInfo;

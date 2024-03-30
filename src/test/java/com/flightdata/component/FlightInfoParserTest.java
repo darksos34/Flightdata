@@ -1,6 +1,7 @@
 package com.flightdata.component;
 
 import com.flightdata.errorhandling.FlightErrorHandling;
+import com.flightdata.flight.dto.FlightInfoDTO;
 import com.flightdata.flight.service.NominatimApiService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.when;
@@ -44,6 +46,18 @@ class FlightInfoParserTest {
         when(nominatimApiService.getCountryLocation(anyString(), anyString())).thenThrow(NullPointerException.class);
 
         assertThrows(NullPointerException.class, () -> flightInfoParser.parseFlightInfo(json));
+    }
+    @Test
+    void testSleepForInterval() {
+
+        int intervalSeconds = 0;
+
+        long startTime = System.currentTimeMillis();
+        FlightInfoDTO.sleepForInterval(intervalSeconds);
+        long endTime = System.currentTimeMillis();
+        long elapsedTimeSeconds = (endTime - startTime) / 1000;
+
+        assertEquals(intervalSeconds, elapsedTimeSeconds, "De slaapduur moet overeenkomen met het interval");
     }
 
 }
