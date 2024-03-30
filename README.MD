@@ -20,15 +20,12 @@
 1. Clone the repository
 
 ```git clone ```
-
 2. Go into the ```flightdata``` folder:
 
 ```cd flightdata ```
-
 3. Build the project using Maven:
 
 ```mvn clean install ```
-
 4. Run the Spring boot application:
 
 ```mvn spring-boot:run ```
