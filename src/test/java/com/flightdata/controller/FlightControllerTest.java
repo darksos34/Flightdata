@@ -34,7 +34,7 @@ class FlightControllerTest {
     void getFlightInfo() throws Exception {
         when(openSkyApiService.getFlightInfo(anyString())).thenReturn(createFlightInfo());
 
-        mockMvc.perform(get("/flights/flight-info")
+        mockMvc.perform(get("/api/flight/flight-info")
                         .param("transponderAddress", anyString())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

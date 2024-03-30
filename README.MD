@@ -39,7 +39,7 @@ If your application is running then
 
 * Open the browser and go to http://localhost:8080
 
-![img.png](img.png)
+![img.png](src/main/resources/images/img.png)
 
 * Open a second browser and
 
@@ -49,4 +49,7 @@ If your application is running then
 
 * You will need to copy the Mode S Code (hex) value.
 
-![img_1.png](img_1.png)
+![img_1.png](src/main/resources/images/img_1.png)
+
+
+* Go back to your Swagger page on localhost fill in the transponders address and hit try out
