@@ -43,7 +43,7 @@ class FlightControllerTest {
                 .andExpect(jsonPath("$.callsign", Matchers.is("FLIGHT123")))
                 .andExpect(jsonPath("$.icao24", Matchers.is("ABC123")))
                 .andExpect(jsonPath("$.originCountry", Matchers.is("NL")))
-                .andExpect(jsonPath("$.longtitude", Matchers.is(80.000)))
+                .andExpect(jsonPath("$.longitude", Matchers.is(80.000)))
                 .andExpect(jsonPath("$.latitude", Matchers.is(35.0000)))
                 .andExpect(jsonPath("$.velocityKmh", Matchers.is(800.0)));
 
@@ -54,7 +54,7 @@ class FlightControllerTest {
         .icao24("ABC123")
         .callsign("FLIGHT123")
         .originCountry("NL")
-        .longtitude(80.000)
+        .longitude(80.000)
         .latitude(35.0000)
         .velocityKmh(800.0)
         .build();
