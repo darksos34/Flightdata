@@ -1,0 +1,6 @@
+api:
+  info:
+    title: Flight Applicatie
+    version: '@project.version'
+    description: |
+      Een API om een call te doen op een bestaande API van OpenSkyNetworkAPI 
