@@ -48,16 +48,14 @@ class NominatimApiServiceTest {
 
     @Test
     void testGetLocationFromJson() throws IOException {
-        // Mocking van de JSON-response
         String json = "{\"display_name\":\"Berlin, Germany\"}";
+
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode = objectMapper.readTree(json);
-        String expectedLocation = rootNode.get("display_name").asText();
 
-        // Roep de methode aan om de locatie te krijgen
+        String expectedLocation = rootNode.get("display_name").asText();
         String location = nominatimApiService.getLocationFromJson(json);
 
-        // Controleer of de juiste locatie is geretourneerd
         assertEquals(expectedLocation, location);
     }
 }
